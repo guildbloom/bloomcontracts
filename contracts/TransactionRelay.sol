@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract TransactionRelay is Pausable, Ownable {
+contract BloomTransactionRelay is Pausable, Ownable {
     using SafeMath for uint256;
 
     uint256 public feePercentage = 1; // 1%

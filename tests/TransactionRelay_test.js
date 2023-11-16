@@ -1,13 +1,13 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("TransactionRelay", function () {
-  let TransactionRelay, relay, owner, addr1, addr2, addrs;
+describe("BloomTransactionRelay", function () {
+  let BloomTransactionRelay, relay, owner, addr1, addr2, addrs;
 
   beforeEach(async function () {
     [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
-    TransactionRelay = await ethers.getContractFactory("TransactionRelay");
-    relay = await TransactionRelay.deploy(owner.address);
+    BloomTransactionRelay = await ethers.getContractFactory("BloomTransactionRelay");
+    relay = await BloomTransactionRelay.deploy(owner.address);
     await relay.deployed();
   });
 
