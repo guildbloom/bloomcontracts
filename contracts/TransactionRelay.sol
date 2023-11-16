@@ -3,11 +3,8 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract BloomTransactionRelay is Pausable, Ownable {
-    using SafeMath for uint256;
-
     uint256 public feePercentage = 1; // 1%
     uint256 public collectedFees;
 
@@ -15,10 +12,10 @@ contract BloomTransactionRelay is Pausable, Ownable {
 
     // Function to Collect fee and relay transaction to receiver
     function relayTransaction(address payable receiver) public payable whenNotPaused {
-        uint256 fee = msg.value.mul(feePercentage).div(100);
-        uint256 amountToForward = msg.value.sub(fee);
+        uint256 fee = (msg.value * feePercentage) / 100;
+        uint256 amountToForward = msg.value - fee;
 
-        collectedFees = collectedFees.add(fee);
+        collectedFees += fee;
 
         // Send the rest of the funds to the receiver
         receiver.transfer(amountToForward);
